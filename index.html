@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - Diseñamos tu futuro digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpeg" href="img/8.jpeg">
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-wrapper-custom">
+                    <img src="img/8.jpeg" alt="NEXUS Logo" class="logo-img">
+                    <span class="logo-text-subtitle">Tu evolución digital</span>
+                </div>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">Inicio</a>
+                <a href="servicios.html" class="nav-link">Servicios</a>
+                <a href="portafolio.html" class="nav-link">Portafolio</a>
+                <a href="nosotros.html" class="nav-link">Nosotros</a>
+                <!-- ENLACE AÑADIDO: Opción de contacto exclusiva para el menú móvil -->
+                <a href="contacto.html" class="nav-link mobile-only-link">Contacto</a>
+            </nav>
+            <a href="contacto.html" class="btn-contacto">Contáctanos</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN PRINCIPAL / HERO CON SLIDER DE 3 IMÁGENES -->
+    <section class="hero" id="inicio">
+        <!-- Carrusel de imágenes de fondo -->
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1920&q=80')"></div>
+        </div>
+        
+        <div class="hero-overlay"></div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title-anim">Tu negocio también merece estar en <span>internet.</span></h1>
+                <p class="hero-text-anim">Creamos páginas web modernas, funcionales y a la medida de tus necesidades.</p>
+                <a href="servicios.html" class="btn-main">Comienza ahora &rarr;</a>
+            </div>
+            <!-- IMAGEN EN LA PARTE DERECHA DEL BANNER -->
+            <div class="hero-visual">
+                <img src="img/7.png" alt="Ilustración o banner Nexus" class="hero-img-right" style="width: 60%; max-width: 450px; height: auto;">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE SERVICIOS -->
+    <main class="page-container">
+        <!-- TÍTULO CON EFECTO REVEAL -->
+        <div class="section-title reveal-text">
+            <span class="badge-subtitle">NUESTRAS SOLUCIONES</span>
+            <h2>Servicios diseñados para escalar</h2>
+            <p>Impulsamos tu presencia digital con tecnologías modernas y estrategias orientadas a resultados.</p>
+        </div>
+        
+        <div class="cards-grid-3-2">
+            <!-- Tarjeta 1: PRESENCIA DIGITAL -->
+            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+                <div class="card-body" style="padding: 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0066ff; background: rgba(0, 102, 255, 0.08); padding: 6px 12px; border-radius: 20px;">Corporativo</span>
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0a192f; margin-bottom: 0.75rem;">PRESENCIA DIGITAL</h3>
+                    <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 1.5rem;">Posiciona tu marca con un sitio web corporativo optimizado, rápido y diseñado para transmitir máxima confianza y profesionalismo.</p>
+                    <a href="servicios.html#presencia" class="card-link" style="font-weight: 700; color: #0066ff; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">Saber más &rarr;</a>
+                </div>
+            </div>
+            
+            <!-- Tarjeta 2: PORTAFOLIO DIGITAL -->
+            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+                <div class="card-body" style="padding: 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0066ff; background: rgba(0, 102, 255, 0.08); padding: 6px 12px; border-radius: 20px;">Showcase</span>
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0a192f; margin-bottom: 0.75rem;">PORTAFOLIO DIGITAL</h3>
+                    <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 1.5rem;">Muestra tus proyectos, trabajos previos o servicios profesionales con un diseño visualmente impactante y elegante.</p>
+                    <a href="servicios.html#portafolio-digital" class="card-link" style="font-weight: 700; color: #0066ff; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">Saber más &rarr;</a>
+                </div>
+            </div>
+            
+            <!-- Tarjeta 3: CATÁLOGO DIGITAL -->
+            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+                <div class="card-body" style="padding: 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0066ff; background: rgba(0, 102, 255, 0.08); padding: 6px 12px; border-radius: 20px;">WhatsApp</span>
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0a192f; margin-bottom: 0.75rem;">CATÁLOGO DIGITAL</h3>
+                    <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 1.5rem;">Muestra tus productos ordenados por categorías con conexión directa a WhatsApp para agilizar la comunicación con tus clientes.</p>
+                    <a href="servicios.html#catalogo" class="card-link" style="font-weight: 700; color: #0066ff; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">Saber más &rarr;</a>
+                </div>
+            </div>
+            
+            <!-- Tarjeta 4: SISTEMA DE PEDIDOS ONLINE -->
+            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+                <div class="card-body" style="padding: 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0066ff; background: rgba(0, 102, 255, 0.08); padding: 6px 12px; border-radius: 20px;">E-Commerce</span>
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0a192f; margin-bottom: 0.75rem;">SISTEMA DE PEDIDOS ONLINE</h3>
+                    <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 1.5rem;">Facilita las compras de tus clientes de forma automatizada, gestionando carritos y órdenes de manera eficiente y segura.</p>
+                    <a href="servicios.html#pedidos" class="card-link" style="font-weight: 700; color: #0066ff; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">Saber más &rarr;</a>
+                </div>
+            </div>
+            
+            <!-- Tarjeta 5: SISTEMA DE RESERVAS Y CITAS -->
+            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+                <div class="card-body" style="padding: 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0066ff; background: rgba(0, 102, 255, 0.08); padding: 6px 12px; border-radius: 20px;">Agenda 24/7</span>
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0a192f; margin-bottom: 0.75rem;">SISTEMA DE RESERVAS Y CITAS</h3>
+                    <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 1.5rem;">Permite que tus clientes agenden citas o servicios en línea de forma autónoma, ahorrando tiempo y optimizando tu agenda.</p>
+                    <a href="servicios.html#reservas" class="card-link" style="font-weight: 700; color: #0066ff; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">Saber más &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Tarjeta 6: EXPERIENCIA WEB ROMÁNTICA PERSONALIZADA -->
+            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+                <div class="card-body" style="padding: 0;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                        <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #0066ff; background: rgba(0, 102, 255, 0.08); padding: 6px 12px; border-radius: 20px;">Especial</span>
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0a192f; margin-bottom: 0.75rem;">EXPERIENCIA WEB ROMÁNTICA</h3>
+                    <p style="font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 1.5rem;">Inmortaliza tu historia de amor con un sitio web interactivo que incluye contador de tiempo real, galerías, música y código QR.</p>
+                    <a href="servicios.html#romantica" class="card-link" style="font-weight: 700; color: #0066ff; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">Saber más &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER MODERNO E INTERACTIVO -->
+    <footer class="footer interactive-footer" id="contacto">
+        <div class="footer-container">
+            <div class="footer-brand footer-anim-item">
+                <div class="footer-logo-box">
+                    <img src="img/8.jpeg" alt="NEXUS Logo Principal" class="footer-logo-img">
+                </div>
+                <p>Diseñamos tu futuro digital con soluciones modernas, escalables y orientadas al éxito de tu marca.</p>
+                <div class="footer-social-badges">
+                    <span class="social-badge">⚡ Alta Velocidad</span>
+                    <span class="social-badge">🔒 100% Seguro</span>
+                </div>
+            </div>
+            
+            <div class="footer-links footer-anim-item">
+                <h4>Navegación</h4>
+                <a href="index.html" class="footer-link-fx"><span>&rarr;</span> Inicio</a>
+                <a href="servicios.html" class="footer-link-fx"><span>&rarr;</span> Servicios</a>
+                <a href="portafolio.html" class="footer-link-fx"><span>&rarr;</span> Portafolio</a>
+                <a href="nosotros.html" class="footer-link-fx"><span>&rarr;</span> Nosotros</a>
+            </div>
+            
+            <div class="footer-contact footer-anim-item">
+                <h4>Contacto Directo</h4>
+                <p class="footer-contact-item">
+                    <span class="contact-icon-wrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </span> 
+                    <strong>contacto@nexusdigital.com</strong>
+                </p>
+                <p class="footer-contact-item">
+                    <span class="contact-icon-wrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </span> 
+                    <strong>+58 412 661 38 18</strong>
+                </p>
+                <p class="footer-contact-item">
+                    <span class="contact-icon-wrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </span> 
+                    <strong>Disponible online</strong>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2026 NEXUS. Todos los derechos reservados.</p>
+                <div class="footer-secondary-logo">
+                    <img src="img/8.jpeg" alt="NEXUS Sello" class="footer-mini-badge-logo">
+                    <span>Innovación Digital</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
