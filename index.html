@@ -9,6 +9,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpeg" href="img/8.jpeg">
+    <style>
+        /* Animación de flotación continua */
+        @keyframes floatingCard {
+            0% {
+                transform: translateY(0px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            }
+            50% {
+                transform: translateY(-8px);
+                box-shadow: 0 18px 40px rgba(0, 102, 255, 0.12);
+            }
+            100% {
+                transform: translateY(0px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            }
+        }
+
+        .floating-card {
+            animation: floatingCard 4s ease-in-out infinite;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efecto al tocar o pasar el cursor: cambia el borde a azul */
+        .floating-card:hover {
+            border-color: rgba(0, 102, 255, 0.6) !important;
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.18) !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -25,7 +53,6 @@
                 <a href="servicios.html" class="nav-link">Servicios</a>
                 <a href="portafolio.html" class="nav-link">Portafolio</a>
                 <a href="nosotros.html" class="nav-link">Nosotros</a>
-                <!-- ENLACE AÑADIDO: Opción de contacto exclusiva para el menú móvil -->
                 <a href="contacto.html" class="nav-link mobile-only-link">Contacto</a>
             </nav>
             <a href="contacto.html" class="btn-contacto">Contáctanos</a>
@@ -39,7 +66,6 @@
 
     <!-- SECCIÓN PRINCIPAL / HERO CON SLIDER DE 3 IMÁGENES -->
     <section class="hero" id="inicio">
-        <!-- Carrusel de imágenes de fondo -->
         <div class="hero-slider">
             <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80')"></div>
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80')"></div>
@@ -54,7 +80,6 @@
                 <p class="hero-text-anim">Creamos páginas web modernas, funcionales y a la medida de tus necesidades.</p>
                 <a href="servicios.html" class="btn-main">Comienza ahora &rarr;</a>
             </div>
-            <!-- IMAGEN EN LA PARTE DERECHA DEL BANNER -->
             <div class="hero-visual">
                 <img src="img/7.png" alt="Ilustración o banner Nexus" class="hero-img-right" style="width: 60%; max-width: 450px; height: auto;">
             </div>
@@ -63,7 +88,6 @@
 
     <!-- SECCIÓN DE SERVICIOS -->
     <main class="page-container">
-        <!-- TÍTULO CON EFECTO REVEAL -->
         <div class="section-title reveal-text">
             <span class="badge-subtitle">NUESTRAS SOLUCIONES</span>
             <h2>Servicios diseñados para escalar</h2>
@@ -72,7 +96,7 @@
         
         <div class="cards-grid-3-2">
             <!-- Tarjeta 1: PRESENCIA DIGITAL -->
-            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+            <div class="card-item reveal-text floating-card" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative;">
                 <div class="card-body" style="padding: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
                         <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
@@ -87,7 +111,7 @@
             </div>
             
             <!-- Tarjeta 2: PORTAFOLIO DIGITAL -->
-            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+            <div class="card-item reveal-text floating-card" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative;">
                 <div class="card-body" style="padding: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
                         <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
@@ -102,7 +126,7 @@
             </div>
             
             <!-- Tarjeta 3: CATÁLOGO DIGITAL -->
-            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+            <div class="card-item reveal-text floating-card" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative;">
                 <div class="card-body" style="padding: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
                         <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
@@ -117,7 +141,7 @@
             </div>
             
             <!-- Tarjeta 4: SISTEMA DE PEDIDOS ONLINE -->
-            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+            <div class="card-item reveal-text floating-card" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative;">
                 <div class="card-body" style="padding: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
                         <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
@@ -132,7 +156,7 @@
             </div>
             
             <!-- Tarjeta 5: SISTEMA DE RESERVAS Y CITAS -->
-            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+            <div class="card-item reveal-text floating-card" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative;">
                 <div class="card-body" style="padding: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
                         <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
@@ -147,7 +171,7 @@
             </div>
 
             <!-- Tarjeta 6: EXPERIENCIA WEB ROMÁNTICA PERSONALIZADA -->
-            <div class="card-item reveal-text" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);">
+            <div class="card-item reveal-text floating-card" style="background: #ffffff; border: 1px solid rgba(0, 102, 255, 0.12); border-radius: 16px; padding: 2rem; position: relative;">
                 <div class="card-body" style="padding: 0;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
                         <div style="width: 56px; height: 56px; background: rgba(0, 102, 255, 0.06); border: 1px solid rgba(0, 102, 255, 0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #0066ff;">
@@ -212,7 +236,6 @@
             <div class="footer-bottom-content">
                 <p>&copy; 2026 Sinapsit. Todos los derechos reservados.</p>
                 <div class="footer-secondary-logo">
-                    
                     <span>Tu evolución digital</span>
                 </div>
             </div>

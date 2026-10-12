@@ -12,6 +12,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpeg" href="img/8.jpeg">
     <style>
+        /* Animación de flotación continua para las tarjetas */
+        @keyframes floatingCard {
+            0% {
+                transform: translateY(0px);
+                box-shadow: 0 4px 20px rgba(16, 29, 51, 0.04);
+            }
+            50% {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 35px rgba(0, 102, 255, 0.12);
+            }
+            100% {
+                transform: translateY(0px);
+                box-shadow: 0 4px 20px rgba(16, 29, 51, 0.04);
+            }
+        }
+
         /* Estructura moderna y profesional para las tarjetas del portafolio */
         .cards-grid {
             display: grid;
@@ -27,12 +43,10 @@
             border: 1px solid #e2e8f0;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(16, 29, 51, 0.04);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            animation: floatingCard 4s ease-in-out infinite;
+            transition: border-color 0.3s ease;
         }
         .card-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(16, 29, 51, 0.1);
             border-color: var(--turquesa);
         }
         .card-img-container {
@@ -261,7 +275,6 @@
             <div class="footer-bottom-content">
                 <p>&copy; 2026 Sinapsit. Todos los derechos reservados.</p>
                 <div class="footer-secondary-logo">
-                    
                     <span>Tu evolución digital</span>
                 </div>
             </div>
@@ -272,9 +285,8 @@
     <script>
         const video = document.getElementById('videoPedidos');
         
-        // Modifica estos valores en segundos según lo que quieras mostrar
-        const tiempoInicio = 5;  // Segundo en el que empieza
-        const tiempoFin = 20;    // Segundo en el que se reinicia
+        const tiempoInicio = 5;  
+        const tiempoFin = 20;    
 
         video.addEventListener('timeupdate', function() {
             if (video.currentTime >= tiempoFin) {

@@ -744,3 +744,64 @@ img {
     transform: translateY(-5px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
+
+
+
+/* Animación de flotación continua para las tarjetas */
+@keyframes floatingCard {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+    50% {
+        transform: translateY(-8px); /* Altura de flotación */
+        box-shadow: 0 18px 40px rgba(0, 102, 255, 0.12); /* Sombra dinámica al flotar */
+    }
+    100% {
+        transform: translateY(0px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+}
+
+.floating-card {
+    animation: floatingCard 4s ease-in-out infinite;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efecto hover adicional opcional para cuando el usuario pase el mouse por encima */
+.floating-card:hover {
+    border-color: rgba(0, 102, 255, 0.35);
+}
+/* Animación y clases de flotación para tarjetas grandes y pequeñas */
+@keyframes floatingCard {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+    50% {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 40px rgba(0, 102, 255, 0.12);
+    }
+    100% {
+        transform: translateY(0px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+}
+
+.floating-catalog-card {
+    animation: floatingCard 4s ease-in-out infinite;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.floating-catalog-card:hover {
+    border-color: rgba(0, 201, 224, 0.4);
+}
+
+.floating-card-small {
+    animation: floatingCard 4.5s ease-in-out infinite;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.floating-card-small:hover {
+    transform: translateY(-12px);
+}
