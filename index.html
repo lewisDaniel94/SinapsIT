@@ -36,6 +36,73 @@
             border-color: rgba(0, 102, 255, 0.6) !important;
             box-shadow: 0 20px 40px rgba(0, 102, 255, 0.18) !important;
         }
+        /* ============================================================
+   EFECTO LIMPIO: FLOTANTE + DESTELLO DE LUZ (VIENTO)
+   ============================================================ */
+
+/* 1. Contenedor principal del logo */
+.logo-wrapper-custom {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden; /* Importante para contener el destello */
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* 2. Imagen del logo con animación flotante continua */
+.logo-img {
+    position: relative;
+    z-index: 2;
+    border-radius: 10px;
+    animation: logoFloat 4s ease-in-out infinite;
+    display: block;
+}
+
+/* 3. Destello de luz pasando (efecto viento / brillo) */
+.logo-wrapper-custom::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.6), 
+        transparent
+    );
+    transform: skewX(-25deg);
+    z-index: 3;
+    pointer-events: none;
+    animation: windShine 4s ease-in-out infinite;
+}
+
+/* Opcional: Pequeño zoom al pasar el cursor */
+.logo-wrapper-custom:hover {
+    transform: scale(1.05);
+}
+
+/* Keyframe para que flote suavemente arriba y abajo */
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Keyframe para el paso del destello de luz */
+@keyframes windShine {
+    0%, 5% {
+        left: -150%;
+    }
+    100% {
+        left: 200%;
+    }
+}
     </style>
 </head>
 <body>

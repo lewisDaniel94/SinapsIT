@@ -93,6 +93,73 @@
             flex-grow: 1;
             text-align: center;
         }
+        /* ============================================================
+   EFECTO LIMPIO: FLOTANTE + DESTELLO DE LUZ (VIENTO)
+   ============================================================ */
+
+/* 1. Contenedor principal del logo */
+.logo-wrapper-custom {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden; /* Importante para contener el destello */
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* 2. Imagen del logo con animación flotante continua */
+.logo-img {
+    position: relative;
+    z-index: 2;
+    border-radius: 10px;
+    animation: logoFloat 4s ease-in-out infinite;
+    display: block;
+}
+
+/* 3. Destello de luz pasando (efecto viento / brillo) */
+.logo-wrapper-custom::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.6), 
+        transparent
+    );
+    transform: skewX(-25deg);
+    z-index: 3;
+    pointer-events: none;
+    animation: windShine 4s ease-in-out infinite;
+}
+
+/* Opcional: Pequeño zoom al pasar el cursor */
+.logo-wrapper-custom:hover {
+    transform: scale(1.05);
+}
+
+/* Keyframe para que flote suavemente arriba y abajo */
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Keyframe para el paso del destello de luz */
+@keyframes windShine {
+    0%, 1% {
+        left: -150%;
+    }
+    100% {
+        left: 200%;
+    }
+}
     </style>
 </head>
 <body>
@@ -184,7 +251,7 @@
                             <span class="material-symbols-sharp">psychology</span>
                         </div>
                         <h3 style="font-size: 1.4rem; color: var(--azul-marino); margin-bottom: 0.8rem;">Profesionalismo</h3>
-                        <p style="color: #556987; font-size: 0.95rem; line-height: 1.6;">Trabajamos bajo los más altos estándares de calidad técnica y estética. Cuidamos cada detalle desde la planeación inicial hasta el despliegue final.</p>
+                        <p style="color: #556987; font-size: 0.95rem; line-height: 1.6;">Trabajamos bajo los más altos estándares de calidad técnica y estética. Cuidamos cada detalle desde la planeación inicial hasta el despliegue final</p>
                     </div>
                 </div>
 
@@ -195,7 +262,7 @@
                             <span class="material-symbols-sharp">tips_and_updates</span>
                         </div>
                         <h3 style="font-size: 1.4rem; color: var(--azul-marino); margin-bottom: 0.8rem;">Innovación</h3>
-                        <p style="color: #556987; font-size: 0.95rem; line-height: 1.6;">Nos mantenemos a la vanguardia de las tendencias tecnológicas y de diseño digital para ofrecerte herramientas veloces y preparadas para el futuro.</p>
+                        <p style="color: #556987; font-size: 0.95rem; line-height: 1.6;">Nos mantenemos a la vanguardia de las tendencias tecnológicas y de diseño digital para ofrecerte herramientas veloces y preparadas para el futuro</p>
                     </div>
                 </div>
 
