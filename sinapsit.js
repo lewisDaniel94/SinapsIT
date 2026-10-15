@@ -21,9 +21,17 @@ const t=$('.tilt');if(t&&!rm){cv.parentElement.addEventListener('pointermove',e=
 /* Servicios: pestañas */
 function tab(id){$$('.tl button').forEach(b=>b.classList.toggle('on',b.dataset.t==id));$$('.pn').forEach(p=>p.classList.toggle('on',p.id==id))}
 $$('.tl button').forEach(b=>b.onclick=()=>{tab(b.dataset.t);history.replaceState(0,0,'#'+b.dataset.t)});
-if($('.tl')){const h=location.hash.slice(1);tab($('#'+h)?.classList.contains('pn')?h:$('.tl button').dataset.t)}
+if($('.tl')){const h=location.hash.slice(1),el=h?document.getElementById(h):null;tab(el&&el.classList.contains('pn')?h:$('.tl button').dataset.t)}
 /* Contacto: formulario a WhatsApp */
 const f=$('#wf');if(f)f.onsubmit=e=>{e.preventDefault();const v=i=>$('#'+i).value;
 open('https://wa.me/584126613818?text='+encodeURIComponent(`Hola, mi nombre es *${v('n')}*.\nMi correo es: *${v('m')}*.\n\n¿Qué servicio o proyecto deseo?\n_${v('d')}_`),'_blank')};
 
 setTimeout(()=>$$('.rv').forEach(e=>e.classList.add('on')),2500);
+
+/* Evita el zoom por gestos (pellizco) en Safari/iOS */
+['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+/* Diagnóstico: abre la web con ?debug al final para ver las medidas reales del celular */
+if(/[?&]debug/.test(location.search)){const d=document.createElement('pre');d.style.cssText='position:fixed;left:6px;bottom:6px;z-index:999;background:#000c;color:#0f0;font:11px/1.3 monospace;padding:8px;border-radius:8px;max-width:92vw;white-space:pre-wrap;pointer-events:none';
+const u=()=>{const v=window.visualViewport;let w='',mx=0;$$('body *').forEach(e=>{if(e.closest('.tl')||getComputedStyle(e).position==='fixed')return;const r=e.getBoundingClientRect();if(r.right>mx){mx=r.right;w=e.tagName.toLowerCase()+'.'+e.className}});
+d.textContent='innerWidth '+innerWidth+'\nscreen '+screen.width+'\nzoom '+(v?v.scale.toFixed(2):'?')+'\nscrollWidth '+document.documentElement.scrollWidth+'\nmeta '+($('meta[name=viewport]')||{}).content+'\nmás ancho '+w+' ('+Math.round(mx)+')'};
+document.body.append(d);u();addEventListener('resize',u);if(window.visualViewport)visualViewport.addEventListener('resize',u);setInterval(u,1000)}
