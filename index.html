@@ -25,15 +25,96 @@
 
 <script src="sinapsit.js?v=3"></script>
 
-<!-- Popup de Promoción de Fin de Año -->
-<div id="promo-popup" class="popup-overlay" style="display: none;">
-    <div class="popup-container">
-        <button id="close-popup" class="popup-close" aria-label="Cerrar">&times;</button>
-        <div class="popup-badge">¡Oferta por tiempo limitado!</div>
-        <h3>¡Promoción de Temporada!</h3>
-        <p>Aprovecha nuestros descuentos especiales de fin de año. Disfruta de un <strong>30% de descuento</strong> en todos nuestros servicios seleccionados hasta el <strong>31 de diciembre</strong> para darle el mejor impulso a tu negocio.</p>
-        <a href="https://wa.me/584126613818?text=Hola,%20me%20interesa%20la%20promoci%C3%B3n%20del%2030%%20de%20descuento%20hasta%20diciembre" class="btn" target="_blank" rel="noopener">Contáctanos aquí &rarr;</a>
-    </div>
+
+
+
+
+<!-- ===== Popup de oferta 30% - pegar justo antes de </body> (reemplaza el popup anterior) ===== -->
+<style>
+html.pp-lock,html.pp-lock body{overflow:hidden!important}
+#promo-popup{position:fixed;inset:0;z-index:9999;display:none;overflow:hidden;align-items:center;justify-content:center;padding:20px;background:rgba(5,10,20,.8);backdrop-filter:blur(5px)}
+#promo-popup.open{display:flex;animation:pf .3s}
+.pp-box{position:relative;width:100%;max-width:420px;max-height:calc(100dvh - 40px);overflow-x:hidden;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;padding:36px 26px 28px;text-align:center;color:#fff;font-family:Inter,sans-serif;background:radial-gradient(120% 80% at 50% -10%,rgba(85,200,212,.25),transparent 60%),#101D33;border:1px solid rgba(85,200,212,.35);border-radius:20px;box-shadow:0 25px 60px rgba(0,0,0,.55),0 0 40px rgba(85,200,212,.15);animation:pu .5s cubic-bezier(.2,1.1,.3,1)}
+.pp-box::-webkit-scrollbar{display:none}
+.pp-x{position:absolute;top:10px;right:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer;opacity:.7}
+.pp-x:hover{opacity:1}
+.pp-tag{display:inline-block;padding:6px 14px;border-radius:99px;background:rgba(85,200,212,.15);color:#55c8d4;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.pp-big{font:800 80px/1 Manrope,sans-serif;margin:14px 0 2px;background:linear-gradient(135deg,#fff,#55c8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pp-sub{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px}
+.pp-box p{color:#a9b6c9;font-size:14px;line-height:1.6;margin:0 0 16px}
+.pp-time{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+.pp-time div{flex:1;padding:8px 0;border-radius:10px;background:rgba(255,255,255,.06)}
+.pp-time b{display:block;font:800 24px Manrope,sans-serif}
+.pp-time span{font-size:10px;text-transform:uppercase;color:#7f8ea3}
+.pp-btn{display:block;padding:15px;border-radius:12px;background:#55c8d4;color:#06202a;font:700 16px Manrope,sans-serif;text-decoration:none;animation:pb 2.2s infinite}
+#pp-c{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pp-rk{position:absolute;bottom:-60px;font-size:30px;pointer-events:none;animation:pr 2.2s ease-out forwards}
+#pp-fab{position:fixed;left:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:9998;display:none;align-items:center;gap:8px;padding:11px 16px;border:0;border-radius:99px;cursor:pointer;background:linear-gradient(135deg,#55c8d4,#8aa4ff);color:#06202a;font:800 14px Manrope,sans-serif;box-shadow:0 10px 26px rgba(0,0,0,.35);animation:pb 2.4s infinite}
+#pp-fab.show{display:inline-flex}
+#pp-fab i{font-style:normal;font-size:18px;display:inline-block;animation:pw 1.6s infinite}
+@keyframes pr{to{transform:translateY(-115vh) rotate(18deg);opacity:0}}
+@keyframes pw{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(14deg)}60%{transform:rotate(-8deg)}}
+@keyframes pf{from{opacity:0}}
+@keyframes pu{from{opacity:0;transform:translateY(40px) scale(.92)}}
+@keyframes pb{50%{transform:scale(1.04);box-shadow:0 0 22px rgba(85,200,212,.6)}}
+@media(max-width:560px){#promo-popup{align-items:flex-end;padding:0}.pp-box{border-radius:20px 20px 0 0;max-width:none}.pp-big{font-size:68px}}
+</style>
+
+<div id="promo-popup">
+  <div class="pp-box">
+    <button class="pp-x" aria-label="Cerrar">&times;</button>
+    <span class="pp-tag">¡Oferta por tiempo limitado!</span>
+    <div class="pp-big">30%</div>
+    <div class="pp-sub">de descuento</div>
+    <p>En servicios seleccionados hasta el <strong>31 de diciembre</strong>. Dale el mejor impulso a tu negocio.</p>
+    <div class="pp-time"><div><b id="pd">00</b><span>Días</span></div><div><b id="ph">00</b><span>Hrs</span></div><div><b id="pm">00</b><span>Min</span></div><div><b id="ps">00</b><span>Seg</span></div></div>
+    <a class="pp-btn" target="_blank" rel="noopener" href="https://wa.me/584126613818?text=Hola,%20me%20interesa%20la%20promoci%C3%B3n%20del%2030%25%20de%20descuento%20hasta%20diciembre">Quiero mi descuento &rarr;</a>
+  </div>
+  <canvas id="pp-c"></canvas>
 </div>
+<button id="pp-fab" aria-label="Ver promoción del 30%"><i>🎁</i> -30%</button>
+
+<script>
+(function(){
+  var p=document.getElementById("promo-popup"),
+      fin=new Date(new Date().getFullYear(),11,31,23,59,59);
+  if(Date.now()>=fin) return;
+  function t(){
+    var s=Math.max(0,Math.floor((fin-Date.now())/1000)),
+        v={pd:s/86400,ph:s%86400/3600,pm:s%3600/60,ps:s%60};
+    for(var k in v) document.getElementById(k).textContent=("0"+Math.floor(v[k])).slice(-2);
+  }
+  var h=document.documentElement;
+  var fab=document.getElementById("pp-fab");
+  function boom(){
+    var c=document.getElementById("pp-c"),x=c.getContext("2d"),W=c.width=innerWidth,H=c.height=innerHeight,
+        col=["#55c8d4","#8aa4ff","#5fe0a8","#fff","#ffd36b"],a=[],t0=Date.now(),i;
+    for(i=0;i<80;i++)a.push({x:W/2,y:H*.4,vx:(Math.random()-.5)*12,vy:-Math.random()*12-2,w:6+Math.random()*5,h:4+Math.random()*4,r:0,vr:(Math.random()-.5)*.4,c:col[i%5]});
+    (function f(){
+      var l=Date.now()-t0;x.clearRect(0,0,W,H);
+      a.forEach(function(q){q.vy+=.3;q.x+=q.vx;q.y+=q.vy;q.r+=q.vr;x.save();x.translate(q.x,q.y);x.rotate(q.r);x.globalAlpha=Math.max(0,1-l/2800);x.fillStyle=q.c;x.fillRect(-q.w/2,-q.h/2,q.w,q.h);x.restore()});
+      if(l<2800)requestAnimationFrame(f);else x.clearRect(0,0,W,H);
+    })();
+    for(i=0;i<7;i++){
+      var r=document.createElement("span");r.className="pp-rk";r.textContent=i%2?"🚀":"🎉";
+      r.style.left=(8+i*13)+"%";r.style.animationDelay=(i*.15)+"s";p.appendChild(r);
+      setTimeout(r.remove.bind(r),3000);
+    }
+  }
+  function open(){fab.classList.remove("show");p.classList.add("open");h.classList.add("pp-lock");boom()}
+  function close(){p.classList.remove("open");h.classList.remove("pp-lock");fab.classList.add("show")}
+  fab.onclick=open;
+  t(); setInterval(t,1000);
+  setTimeout(open,1000);
+  p.querySelector(".pp-x").onclick=close;
+  p.onclick=function(e){if(e.target===p)close()};
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+})();
+</script>
+
+
+
+
+
 
 </body></html>

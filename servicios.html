@@ -3,14 +3,138 @@
 <title>Servicios - Sinapsit</title><meta name="theme-color" content="#101D33">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3"><link rel="icon" type="image/jpeg" href="img/logo-header.png"></head><body>
+<link rel="stylesheet" href="style.css?v=3"><link rel="icon" type="image/jpeg" href="img/logo-header.png"><style>
+/* ===== Precios, descuento y cotizador · Sinapsit (todo en este archivo) ===== */
+.sp-price,.sp-price *,.sp-sec,.sp-sec *,.sp-bar,.sp-bar *{box-sizing:border-box}
+.sp-sec [hidden]{display:none!important}
+
+/* bloque de precio dentro de cada ficha */
+.sp-price{margin:20px 0 6px;padding:18px;border:1px solid rgba(128,128,128,.35);border-radius:16px;background:rgba(128,128,128,.08);display:grid;gap:8px;max-width:440px}
+.sp-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sp-old{font-size:1rem;opacity:.65}
+.sp-old s{text-decoration-thickness:2px}
+.sp-badge{background:#34d399;color:#052e1c;font-weight:800;font-size:.78rem;padding:4px 10px;border-radius:999px;line-height:1.2}
+.sp-lbl{margin:0;font-size:.78rem;opacity:.7}
+.sp-now{display:flex;align-items:flex-start;gap:3px;font-family:Manrope,Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(2.1rem,7vw,2.7rem);line-height:1;letter-spacing:-.02em}
+.sp-now small{font-size:.48em;margin-top:.2em;font-weight:700;opacity:.85}
+.sp-save{margin:0;font-size:.86rem;opacity:.85}
+.sp-save b{font-weight:800}
+.sp-add{margin-top:6px;min-height:46px;padding:0 20px;border:1.5px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:600 .92rem/1 Inter,system-ui,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .2s,color .2s,border-color .2s,transform .15s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.sp-add b{font-size:1.15rem;line-height:1}
+.sp-add:hover{background:rgba(128,128,128,.16)}
+.sp-add:active{transform:scale(.97)}
+.sp-add.is-on{background:#34d399;border-color:#34d399;color:#052e1c}
+
+/* sección del cotizador */
+.sp-sec{padding:clamp(48px,8vw,90px) 0}
+.sp-head{max-width:720px;margin:0 auto clamp(26px,4vw,44px);text-align:center}
+.sp-kicker{display:inline-block;font:700 .75rem/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;background:#34d399;color:#052e1c}
+.sp-head h2{font-family:Manrope,Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(1.7rem,5.4vw,2.6rem);line-height:1.15;margin:14px 0 10px}
+.sp-head p{margin:0;opacity:.85}
+.sp-grid{display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.sp-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px;align-items:start}.sp-sum{position:sticky;top:96px}}
+.sp-list{display:grid;gap:10px}
+.sp-item{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;min-height:68px;padding:14px 16px;border:1.5px solid rgba(128,128,128,.35);border-radius:16px;background:rgba(128,128,128,.06);cursor:pointer;transition:border-color .2s,background .2s,transform .15s;-webkit-tap-highlight-color:transparent}
+.sp-item:hover{border-color:rgba(52,211,153,.8)}
+.sp-item:active{transform:scale(.99)}
+.sp-item input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.sp-item:focus-within{outline:2px solid #34d399;outline-offset:2px}
+.sp-item.is-on{border-color:#34d399;background:rgba(52,211,153,.14)}
+.sp-ck{width:26px;height:26px;border-radius:8px;border:2px solid currentColor;opacity:.6;display:grid;place-items:center;transition:all .2s}
+.sp-ck::after{content:"";width:6px;height:12px;border:solid #052e1c;border-width:0 3px 3px 0;transform:rotate(45deg) scale(0);margin-top:-2px;transition:transform .2s}
+.sp-item.is-on .sp-ck{background:#34d399;border-color:#34d399;opacity:1}
+.sp-item.is-on .sp-ck::after{transform:rotate(45deg) scale(1)}
+.sp-info{display:grid;gap:2px;min-width:0}
+.sp-info b{font-weight:700;font-size:.98rem;line-height:1.25}
+.sp-info em{font-style:normal;font-size:.8rem;opacity:.7}
+.sp-pr{display:grid;justify-items:end;line-height:1.1}
+.sp-pr s{font-size:.8rem;opacity:.6}
+.sp-pr strong{font-family:Manrope,Inter,system-ui,sans-serif;font-weight:800;font-size:1.25rem}
+
+/* resumen (fondo propio para que siempre se lea bien) */
+.sp-sum{background:#101D33;color:#fff;border-radius:20px;padding:clamp(20px,3vw,28px);display:grid;gap:14px;box-shadow:0 18px 50px rgba(16,29,51,.35)}
+.sp-sum h3{margin:0;font-family:Manrope,Inter,system-ui,sans-serif;font-weight:800;font-size:1.3rem;color:#fff}
+.sp-count{margin:0;font-size:.9rem;color:#b8c4d9}
+.sp-lines{list-style:none;margin:0;padding:0;display:grid;gap:8px;max-height:220px;overflow:auto}
+.sp-lines li{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;color:#e6ecf7}
+.sp-lines li span:last-child{white-space:nowrap;font-weight:700}
+.sp-tot{margin:0;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.15);display:grid;gap:8px}
+.sp-tot div{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.sp-tot dt{margin:0;font-size:.9rem;color:#b8c4d9}
+.sp-tot dd{margin:0;font-weight:700;color:#fff}
+.sp-tot .sp-reg dd{text-decoration:line-through;opacity:.6}
+.sp-tot .sp-dsc dd{color:#34d399}
+.sp-tot .sp-final{padding-top:8px;border-top:1px dashed rgba(255,255,255,.2)}
+.sp-tot .sp-final dt{color:#fff;font-weight:700}
+.sp-tot .sp-final dd{font-family:Manrope,Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(1.9rem,6vw,2.4rem);letter-spacing:-.02em}
+.sp-saved{margin:0;padding:10px 12px;border-radius:12px;background:rgba(52,211,153,.16);color:#6ee7b7;font-size:.88rem;font-weight:600}
+.sp-wa{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 20px;border-radius:999px;background:#25D366;color:#06210f;font:800 .95rem/1.1 Inter,system-ui,sans-serif;text-decoration:none;text-align:center;transition:transform .15s,filter .2s}
+.sp-wa:hover{filter:brightness(1.06)}
+.sp-wa:active{transform:scale(.98)}
+.sp-sub{display:flex;gap:10px}
+.sp-sub button{flex:1;min-height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;font:600 .85rem Inter,system-ui,sans-serif;cursor:pointer;touch-action:manipulation}
+.sp-sub button:hover{background:rgba(255,255,255,.1)}
+.sp-note{margin:0;font-size:.74rem;color:#93a3bf}
+
+/* barra inferior con el total mientras eliges */
+.sp-bar{position:fixed;left:0;right:0;bottom:0;z-index:950;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px max(16px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:#101D33;color:#fff;border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -10px 30px rgba(0,0,0,.25);transform:translateY(110%);visibility:hidden;transition:transform .35s cubic-bezier(.22,.8,.22,1),visibility 0s linear .35s}
+.sp-bar.on{transform:none;visibility:visible;transition:transform .35s cubic-bezier(.22,.8,.22,1),visibility 0s}
+.sp-bar>div{display:grid;line-height:1.2;min-width:0}
+.sp-bar small{color:#b8c4d9;font-size:.76rem}
+.sp-bar strong{font-family:Manrope,Inter,system-ui,sans-serif;font-size:1.25rem;font-weight:800}
+.sp-bar a{flex:none;min-height:46px;display:inline-flex;align-items:center;padding:0 20px;border-radius:999px;background:#34d399;color:#052e1c;font:800 .9rem/1 Inter,system-ui,sans-serif;text-decoration:none}
+body.sp-pad{padding-bottom:84px}
+.band .sp-kicker{margin-bottom:14px}
+
+@media(prefers-reduced-motion:reduce){.sp-price *,.sp-sec *,.sp-bar{transition:none!important;animation:none!important}}
+
+/* ===== Aviso de deslizar en las pestañas de servicios (móvil) ===== */
+.tabs .tl{-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs .tl::-webkit-scrollbar{display:none}
+.tabs .tl.sp-fr{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 64px),transparent)}
+.tabs .tl.sp-fl{-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px);mask-image:linear-gradient(90deg,transparent,#000 40px)}
+.tabs .tl.sp-fl.sp-fr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 64px),transparent)}
+.sp-swipe{grid-column:1/-1;display:flex;align-items:center;gap:10px;width:fit-content;max-width:100%;margin:0 0 12px;padding:9px 16px;border:1px solid rgba(85,200,212,.45);border-radius:999px;background:rgba(85,200,212,.12);color:#55C8D4;font:600 .84rem/1.2 Inter,system-ui,sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:opacity .4s,transform .4s}
+.sp-swipe svg{flex:none;animation:sp-nudge 1.3s ease-in-out infinite}
+.sp-swipe.sp-gone{opacity:0;transform:translateY(-6px);pointer-events:none}
+@keyframes sp-nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+@media(prefers-reduced-motion:reduce){.sp-swipe svg{animation:none}}
+</style></head><body>
 <div class="pg"></div>
 <header class="hdr"><div class="wrap nav"><a href="index.html" class="logo"><span class="lg lh" role="img" aria-label="Sinapsit"></span><small class="tg">Tu evolución digital</small></a>
 <nav class="menu"><a href="index.html">Inicio</a><a href="servicios.html" class=on>Servicios</a><a href="portafolio.html">Portafolio</a><a href="nosotros.html">Nosotros</a></nav><a href="contacto.html" class="btn sm">Contáctanos</a>
 <button class="burger" aria-label="Menú"><i></i><i></i><i></i></button></div></header>
-<header class="ph2"><div class="wrap"><h1>Creamos herramientas digitales adaptadas a las necesidades de tu negocio</h1><p>No todos los negocios necesitan lo mismo. Desarrollamos soluciones personalizadas: desde una página web profesional hasta sistemas completos para gestionar productos, clientes, pedidos y reservas.</p></div></header><section><div class="wrap"><div class="tabs"><div class="tl"><button data-t="presencia">01. Presencia digital</button><button data-t="portafolio-digital">02. Portafolio digital</button><button data-t="catalogo">03. Catálogo digital</button><button data-t="pedidos">04. Sistema de pedidos online</button><button data-t="reservas">05. Sistema de reservas y citas</button><button data-t="romantica">06. Experiencia web romántica</button></div><div><div class="card pn" id="presencia"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span class="tag">01. Presencia digital</span><h2>Página Web Esencial</h2><p>Ideal para emprendimientos, profesionales, marcas y pequeños negocios que necesitan tener presencia en internet.</p><h4 style="margin-top:22px">Incluye:</h4><ul class="ck"><li>Página de inicio</li><li>Información del negocio</li><li>Quiénes somos</li><li>Servicios o productos</li><li>Galería</li><li>Información de contacto</li><li>Botón de WhatsApp</li><li>Redes sociales</li><li>Ubicación</li><li>Horarios de atención</li><li>Diseño adaptable a celulares</li><li>Dominio y publicación</li></ul><p class="ideal"><b>Ideal para:</b> Profesionales · Emprendimientos · Empresas · Marcas personales · Negocios locales</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="portafolio-digital"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><span class="tag">02. Portafolio digital</span><h2>Tu experiencia en tu carta de presentación</h2><p>Una página personal diseñada para mostrar quién eres, qué haces y lo que puedes ofrecer.</p><h4 style="margin-top:22px">Puede incluir:</h4><ul class="ck"><li>Presentación personal</li><li>Perfil profesional</li><li>Experiencia</li><li>Formación</li><li>Habilidades</li><li>Servicios</li><li>Proyectos realizados</li><li>Portafolio</li><li>Testimonios</li><li>Contacto</li><li>Redes sociales</li><li>Botón de WhatsApp</li><li>Descarga de CV</li></ul><p class="ideal"><b>Ideal para:</b> Profesionales · Freelancers · Diseñadores · Fotógrafos · Consultores · Técnicos · Estudiantes · Personas en búsqueda de empleo</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="catalogo"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><span class="tag">03. Catálogo digital</span><h2>Tus productos disponibles en un solo lugar</h2><p>Una alternativa para negocios que quieren mostrar sus productos sin necesidad de implementar una tienda online completa.</p><h4 style="margin-top:22px">Incluye:</h4><ul class="ck"><li>Catálogo de productos</li><li>Categorías</li><li>Fotografías</li><li>Precios</li><li>Buscador</li><li>Productos en oferta</li><li>Botón de consulta por WhatsApp</li><li>Diseño adaptable a celulares</li></ul><p class="ideal"><b>Ideal para:</b> Tiendas · Boutiques · Ferreterías · Reposterías · Emprendimientos · Distribuidores · Comercios</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="pedidos"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><span class="tag">04. Sistema de pedidos online</span><h2>Convierte tu página en un canal de ventas</h2><p>Una solución para que tus clientes puedan seleccionar productos, armar su pedido y enviarlo directamente al negocio.</p><h4 style="margin-top:22px">Incluye:</h4><ul class="ck"><li>Catálogo</li><li>Categorías</li><li>Buscador</li><li>Fichas de productos</li><li>Selección de cantidades</li><li>Carrito de compras</li><li>Instrucciones especiales</li><li>Métodos de pago configurables</li><li>Pick Up</li><li>Delivery</li><li>Dirección de entrega</li><li>Generación del pedido</li><li>Integración con WhatsApp</li><li>Diseño adaptable a celulares</li></ul><p class="ideal"><b>Ideal para:</b> Automatizar las ventas, centralizar la recepción de pedidos y mejorar la experiencia de compra del cliente a través de canales digitales.</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="reservas"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span class="tag">05. Sistema de reservas y citas</span><h2>Permite que tus clientes reserven sin tener que escribirte</h2><p>Una herramienta automatizada para gestionar la disponibilidad de tiempo y las citas de tu negocio.</p><h4 style="margin-top:22px">Puede incluir:</h4><ul class="ck"><li>Calendario</li><li>Selección de servicio</li><li>Selección del profesional</li><li>Selección de fecha</li><li>Selección de horario</li><li>Confirmación de reserva</li><li>Confirmación por WhatsApp</li></ul><p class="ideal"><b>Ideal para:</b> Barberías · Estéticas · Consultorios · Clínicas · Hoteles · Profesionales · Técnicos · Servicios a domicilio</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="romantica"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="tag">06. Experiencia web romántica</span><h2>Un sitio web interactivo para inmortalizar tu historia de amor</h2><p>Una experiencia digital única, emotiva y memorable para regalar a esa persona especial en cualquier ocasión importante.</p><h4 style="margin-top:22px">Puede incluir:</h4><ul class="ck"><li>Diseño optimizado para móviles (modo app)</li><li>Contador de tiempo real (años, meses, días, horas y minutos)</li><li>Carta de amor o dedicatoria con tipografías elegantes</li><li>Galería de fotos interactiva con efecto de ampliación</li><li>Reproductor de música flotante con la canción favorita</li><li>Código QR listo para descargar y regalar</li><li>Código QR de la página listo para compartir</li></ul><p class="ideal"><b>Ideal para:</b> Aniversarios de novios o bodas · Cumpleaños de pareja · San Valentín · Fechas a distancia</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div></div></div>
+<header class="ph2"><div class="wrap"><h1>Creamos herramientas digitales adaptadas a las necesidades de tu negocio</h1><p>No todos los negocios necesitan lo mismo. Desarrollamos soluciones personalizadas: desde una página web profesional hasta sistemas completos para gestionar productos, clientes, pedidos y reservas.</p></div></header><section><div class="wrap"><div class="tabs"><div class="tl"><button data-t="presencia">01. Presencia digital</button><button data-t="portafolio-digital">02. Portafolio digital</button><button data-t="catalogo">03. Catálogo digital</button><button data-t="pedidos">04. Sistema de pedidos online</button><button data-t="reservas">05. Sistema de reservas y citas</button><button data-t="romantica">06. Experiencia web romántica</button></div><div><div class="card pn" id="presencia"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span class="tag">01. Presencia digital</span><h2>Página Web Esencial</h2><p>Ideal para emprendimientos, profesionales, marcas y pequeños negocios que necesitan tener presencia en internet.</p><div class="sp-price" data-price="130"><div class="sp-row"><span class="sp-old"><s>$130</s></span><span class="sp-badge">-30%</span></div><p class="sp-lbl">Precio promocional</p><div class="sp-now"><small>$</small><span class="sp-val">91</span></div><p class="sp-save">Ahorras <b>$39</b> frente al precio regular</p><button type="button" class="sp-add" data-id="presencia" aria-pressed="false"><b aria-hidden="true">+</b> <span>Añadir a mi cotización</span></button></div><h4 style="margin-top:22px">Incluye:</h4><ul class="ck"><li>Página de inicio</li><li>Información del negocio</li><li>Quiénes somos</li><li>Servicios o productos</li><li>Galería</li><li>Información de contacto</li><li>Botón de WhatsApp</li><li>Redes sociales</li><li>Ubicación</li><li>Horarios de atención</li><li>Diseño adaptable a celulares</li><li>Dominio y publicación</li></ul><p class="ideal"><b>Ideal para:</b> Profesionales · Emprendimientos · Empresas · Marcas personales · Negocios locales</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="portafolio-digital"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><span class="tag">02. Portafolio digital</span><h2>Tu experiencia en tu carta de presentación</h2><p>Una página personal diseñada para mostrar quién eres, qué haces y lo que puedes ofrecer.</p><div class="sp-price" data-price="90"><div class="sp-row"><span class="sp-old"><s>$90</s></span><span class="sp-badge">-30%</span></div><p class="sp-lbl">Precio promocional</p><div class="sp-now"><small>$</small><span class="sp-val">63</span></div><p class="sp-save">Ahorras <b>$27</b> frente al precio regular</p><button type="button" class="sp-add" data-id="portafolio-digital" aria-pressed="false"><b aria-hidden="true">+</b> <span>Añadir a mi cotización</span></button></div><h4 style="margin-top:22px">Puede incluir:</h4><ul class="ck"><li>Presentación personal</li><li>Perfil profesional</li><li>Experiencia</li><li>Formación</li><li>Habilidades</li><li>Servicios</li><li>Proyectos realizados</li><li>Portafolio</li><li>Testimonios</li><li>Contacto</li><li>Redes sociales</li><li>Botón de WhatsApp</li><li>Descarga de CV</li></ul><p class="ideal"><b>Ideal para:</b> Profesionales · Freelancers · Diseñadores · Fotógrafos · Consultores · Técnicos · Estudiantes · Personas en búsqueda de empleo</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="catalogo"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><span class="tag">03. Catálogo digital</span><h2>Tus productos disponibles en un solo lugar</h2><p>Una alternativa para negocios que quieren mostrar sus productos sin necesidad de implementar una tienda online completa.</p><div class="sp-price" data-price="100"><div class="sp-row"><span class="sp-old"><s>$100</s></span><span class="sp-badge">-30%</span></div><p class="sp-lbl">Precio promocional</p><div class="sp-now"><small>$</small><span class="sp-val">70</span></div><p class="sp-save">Ahorras <b>$30</b> frente al precio regular</p><button type="button" class="sp-add" data-id="catalogo" aria-pressed="false"><b aria-hidden="true">+</b> <span>Añadir a mi cotización</span></button></div><h4 style="margin-top:22px">Incluye:</h4><ul class="ck"><li>Catálogo de productos</li><li>Categorías</li><li>Fotografías</li><li>Precios</li><li>Buscador</li><li>Productos en oferta</li><li>Botón de consulta por WhatsApp</li><li>Diseño adaptable a celulares</li></ul><p class="ideal"><b>Ideal para:</b> Tiendas · Boutiques · Ferreterías · Reposterías · Emprendimientos · Distribuidores · Comercios</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="pedidos"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><span class="tag">04. Sistema de pedidos online</span><h2>Convierte tu página en un canal de ventas</h2><p>Una solución para que tus clientes puedan seleccionar productos, armar su pedido y enviarlo directamente al negocio.</p><div class="sp-price" data-price="150"><div class="sp-row"><span class="sp-old"><s>$150</s></span><span class="sp-badge">-30%</span></div><p class="sp-lbl">Precio promocional</p><div class="sp-now"><small>$</small><span class="sp-val">105</span></div><p class="sp-save">Ahorras <b>$45</b> frente al precio regular</p><button type="button" class="sp-add" data-id="pedidos" aria-pressed="false"><b aria-hidden="true">+</b> <span>Añadir a mi cotización</span></button></div><h4 style="margin-top:22px">Incluye:</h4><ul class="ck"><li>Catálogo</li><li>Categorías</li><li>Buscador</li><li>Fichas de productos</li><li>Selección de cantidades</li><li>Carrito de compras</li><li>Instrucciones especiales</li><li>Métodos de pago configurables</li><li>Pick Up</li><li>Delivery</li><li>Dirección de entrega</li><li>Generación del pedido</li><li>Integración con WhatsApp</li><li>Diseño adaptable a celulares</li></ul><p class="ideal"><b>Ideal para:</b> Automatizar las ventas, centralizar la recepción de pedidos y mejorar la experiencia de compra del cliente a través de canales digitales.</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="reservas"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span class="tag">05. Sistema de reservas y citas</span><h2>Permite que tus clientes reserven sin tener que escribirte</h2><p>Una herramienta automatizada para gestionar la disponibilidad de tiempo y las citas de tu negocio.</p><div class="sp-price" data-price="110"><div class="sp-row"><span class="sp-old"><s>$110</s></span><span class="sp-badge">-30%</span></div><p class="sp-lbl">Precio promocional</p><div class="sp-now"><small>$</small><span class="sp-val">77</span></div><p class="sp-save">Ahorras <b>$33</b> frente al precio regular</p><button type="button" class="sp-add" data-id="reservas" aria-pressed="false"><b aria-hidden="true">+</b> <span>Añadir a mi cotización</span></button></div><h4 style="margin-top:22px">Puede incluir:</h4><ul class="ck"><li>Calendario</li><li>Selección de servicio</li><li>Selección del profesional</li><li>Selección de fecha</li><li>Selección de horario</li><li>Confirmación de reserva</li><li>Confirmación por WhatsApp</li></ul><p class="ideal"><b>Ideal para:</b> Barberías · Estéticas · Consultorios · Clínicas · Hoteles · Profesionales · Técnicos · Servicios a domicilio</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div><div class="card pn" id="romantica"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="tag">06. Experiencia web romántica</span><h2>Un sitio web interactivo para inmortalizar tu historia de amor</h2><p>Una experiencia digital única, emotiva y memorable para regalar a esa persona especial en cualquier ocasión importante.</p><div class="sp-price" data-price="25"><div class="sp-row"><span class="sp-old"><s>$25</s></span><span class="sp-badge">-30%</span></div><p class="sp-lbl">Precio promocional</p><div class="sp-now"><small>$</small><span class="sp-val">17.50</span></div><p class="sp-save">Ahorras <b>$7.50</b> frente al precio regular</p><button type="button" class="sp-add" data-id="romantica" aria-pressed="false"><b aria-hidden="true">+</b> <span>Añadir a mi cotización</span></button></div><h4 style="margin-top:22px">Puede incluir:</h4><ul class="ck"><li>Diseño optimizado para móviles (modo app)</li><li>Contador de tiempo real (años, meses, días, horas y minutos)</li><li>Carta de amor o dedicatoria con tipografías elegantes</li><li>Galería de fotos interactiva con efecto de ampliación</li><li>Reproductor de música flotante con la canción favorita</li><li>Código QR listo para descargar y regalar</li><li>Código QR de la página listo para compartir</li></ul><p class="ideal"><b>Ideal para:</b> Aniversarios de novios o bodas · Cumpleaños de pareja · San Valentín · Fechas a distancia</p><a class="btn sm" style="margin-top:22px" href="contacto.html">Solicitar este servicio &rarr;</a></div></div></div>
 <p class="note">Los precios son referenciales y pueden variar según la complejidad, cantidad de información, integraciones y requerimientos del proyecto.</p></div></section>
-<section style="background:var(--n)"><div class="wrap"><div class="hd rv"><h2>Soluciones según el tipo de negocio</h2><p>Descubre qué combinación se adapta a tu sector comercial.</p></div><div class="grid"><div class="card rv"><h3>Restaurantes</h3><p>Web + menú digital + pedidos + carrito + delivery + WhatsApp + reservas.</p></div><div class="card rv"><h3>Barberías</h3><p>Web + servicios + portafolio + reservas + selección de profesional + fidelización.</p></div><div class="card rv"><h3>Clínicas y consultorios</h3><p>Web + especialistas + servicios + reservas + formularios + área privada.</p></div><div class="card rv"><h3>Tiendas</h3><p>Web + catálogo + carrito + pagos + inventario + promociones.</p></div><div class="card rv"><h3>Empresas</h3><p>Web corporativa + servicios + formularios + documentos + blog + panel administrativo.</p></div><div class="card rv"><h3>Profesionales</h3><p>Portafolio + servicios + experiencia + proyectos + contacto.</p></div></div></div></section><section style="padding-top:0"><div class="wrap"><div class="band rv"><h2>¿Listo para evolucionar tu negocio?</h2><p>Cuéntanos tu idea y la convertimos en una experiencia digital a tu medida.</p><a class="btn" href="contacto.html">Inicia tu proyecto &rarr;</a></div></div></section>
+<section class="sp-sec" id="cotizador" aria-labelledby="sp-h"><div class="wrap">
+<div class="sp-head"><span class="sp-kicker">Cotizador interactivo</span>
+<h2 id="sp-h">Arma tu cotización y mira tu total al instante</h2>
+<p>Elige los servicios que necesitas. Todos los precios ya incluyen el <b>30% de descuento</b>.</p></div>
+<div class="sp-grid">
+<div class="sp-list" id="sp-list" role="group" aria-label="Servicios disponibles">
+<label class="sp-item"><input type="checkbox" value="presencia" data-name="Presencia digital" data-price="130"><span class="sp-ck" aria-hidden="true"></span><span class="sp-info"><b>Presencia digital</b><em>Página Web Esencial</em></span><span class="sp-pr"><s>$130</s><strong>$91</strong></span></label>
+<label class="sp-item"><input type="checkbox" value="portafolio-digital" data-name="Portafolio digital" data-price="90"><span class="sp-ck" aria-hidden="true"></span><span class="sp-info"><b>Portafolio digital</b><em>Tu experiencia en tu carta de presentación</em></span><span class="sp-pr"><s>$90</s><strong>$63</strong></span></label>
+<label class="sp-item"><input type="checkbox" value="catalogo" data-name="Catálogo digital" data-price="100"><span class="sp-ck" aria-hidden="true"></span><span class="sp-info"><b>Catálogo digital</b><em>Tus productos disponibles en un solo lugar</em></span><span class="sp-pr"><s>$100</s><strong>$70</strong></span></label>
+<label class="sp-item"><input type="checkbox" value="pedidos" data-name="Sistema de pedidos online" data-price="150"><span class="sp-ck" aria-hidden="true"></span><span class="sp-info"><b>Sistema de pedidos online</b><em>Convierte tu página en un canal de ventas</em></span><span class="sp-pr"><s>$150</s><strong>$105</strong></span></label>
+<label class="sp-item"><input type="checkbox" value="reservas" data-name="Sistema de reservas y citas" data-price="110"><span class="sp-ck" aria-hidden="true"></span><span class="sp-info"><b>Sistema de reservas y citas</b><em>Permite que tus clientes reserven sin escribirte</em></span><span class="sp-pr"><s>$110</s><strong>$77</strong></span></label>
+<label class="sp-item"><input type="checkbox" value="romantica" data-name="Experiencia web romántica" data-price="25"><span class="sp-ck" aria-hidden="true"></span><span class="sp-info"><b>Experiencia web romántica</b><em>Un sitio web interactivo para tu historia de amor</em></span><span class="sp-pr"><s>$25</s><strong>$17.50</strong></span></label>
+</div>
+<aside class="sp-sum" aria-live="polite">
+<h3>Tu cotización</h3>
+<p class="sp-count" id="sp-count">Aún no has elegido servicios</p>
+<ul class="sp-lines" id="sp-lines"></ul>
+<dl class="sp-tot">
+<div class="sp-reg"><dt>Precio regular</dt><dd id="sp-reg">$0</dd></div>
+<div class="sp-dsc"><dt>Descuento (-30%)</dt><dd id="sp-dis">-$0</dd></div>
+<div class="sp-final"><dt>Total a pagar</dt><dd id="sp-tot">$0</dd></div>
+</dl>
+<p class="sp-saved" id="sp-saved" hidden></p>
+<a class="sp-wa" id="sp-wa" href="https://wa.me/584126613818?text=Hola%20Sinapsit%2C%20me%20interesan%20sus%20servicios%20digitales." target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Consultar por WhatsApp</span></a>
+<div class="sp-sub"><button type="button" id="sp-all">Seleccionar todos</button><button type="button" id="sp-clear">Limpiar</button></div>
+<p class="sp-note">Precios referenciales en dólares; pueden variar según la complejidad y los requerimientos del proyecto.</p>
+</aside>
+</div></div></section>
+<section style="background:var(--n)"><div class="wrap"><div class="hd rv"><h2>Soluciones según el tipo de negocio</h2><p>Descubre qué combinación se adapta a tu sector comercial.</p></div><div class="grid"><div class="card rv"><h3>Restaurantes</h3><p>Web + menú digital + pedidos + carrito + delivery + WhatsApp + reservas.</p></div><div class="card rv"><h3>Barberías</h3><p>Web + servicios + portafolio + reservas + selección de profesional + fidelización.</p></div><div class="card rv"><h3>Clínicas y consultorios</h3><p>Web + especialistas + servicios + reservas + formularios + área privada.</p></div><div class="card rv"><h3>Tiendas</h3><p>Web + catálogo + carrito + pagos + inventario + promociones.</p></div><div class="card rv"><h3>Empresas</h3><p>Web corporativa + servicios + formularios + documentos + blog + panel administrativo.</p></div><div class="card rv"><h3>Profesionales</h3><p>Portafolio + servicios + experiencia + proyectos + contacto.</p></div></div></div></section><section style="padding-top:0"><div class="wrap"><div class="band rv"><span class="sp-kicker">Beneficio incluido</span><h2>Dominio gratis por 1 año con tu web</h2><p>Tu marca con su propia dirección en internet, sin costo de dominio durante el primer año.</p><a class="btn" href="contacto.html">Quiero mi web con dominio gratis &rarr;</a></div></div></section>
 <footer class="ft"><div class="wrap"><div class="ftg"><div><span class="lg lf" role="img" aria-label="Sinapsit - Tu evolución digital"></span><p>Diseñamos tu futuro digital con soluciones modernas, escalables y orientadas al éxito de tu marca.</p></div>
 <div class="l"><h4>Navegación</h4><a href="index.html">&rarr; Inicio</a><a href="servicios.html">&rarr; Servicios</a><a href="portafolio.html">&rarr; Portafolio</a><a href="nosotros.html">&rarr; Nosotros</a></div>
 <div class="l"><h4>Contacto directo</h4><a href="https://wa.me/584126613818?text=Hola,%20me%20interesan%20sus%20servicios%20digitales" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>
@@ -18,4 +142,165 @@
 <a href="https://www.facebook.com/share/19xoFse7zA/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a></div></div>
 <div class="fb"><span>&copy; 2026 Sinapsit. Todos los derechos reservados.</span><span>Tu evolución digital</span></div></div></footer>
 
-<script src="sinapsit.js?v=3"></script></body></html>
+<div class="sp-bar" id="sp-bar" aria-live="polite"><div><small id="sp-bn">0 servicios</small><strong id="sp-bt">$0</strong></div><a href="#cotizador">Ver cotización</a></div>
+<script src="sinapsit.js?v=3"></script><script>
+(function(){
+'use strict';
+var DISC=30,WA='584126613818',HI='Hola Sinapsit, ';
+var reduce=false;try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){}
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+/* todo se calcula en centavos para evitar errores de decimales */
+function reg(p){return Math.round(p*100)}
+function dsc(p){return Math.round(p*(100-DISC))}
+function num(c){return c%100===0?String(c/100):(c/100).toFixed(2)}
+function fmt(c){return '$'+num(c)}
+
+/* animación suave de números */
+function tween(el,to,render){
+  var from=el._v==null?0:el._v;
+  if(el._raf)cancelAnimationFrame(el._raf);
+  if(reduce||from===to){el._v=to;render(to);return}
+  var t0=null,d=550;
+  function step(t){
+    if(t0===null)t0=t;
+    var k=Math.min((t-t0)/d,1),e=1-Math.pow(1-k,3),v=Math.round(from+(to-from)*e);
+    el._v=v;render(v);
+    if(k<1)el._raf=requestAnimationFrame(step);
+  }
+  el._raf=requestAnimationFrame(step);
+}
+
+/* precios de las fichas (recalculados desde data-price) */
+var blocks=$$('.sp-price');
+blocks.forEach(function(b){
+  var p=+b.dataset.price;
+  $('.sp-old s',b).textContent=fmt(reg(p));
+  $('.sp-badge',b).textContent='-'+DISC+'%';
+  $('.sp-val',b).textContent=num(dsc(p));
+  $('.sp-save b',b).textContent=fmt(reg(p)-dsc(p));
+});
+if('IntersectionObserver' in window&&!reduce){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var v=$('.sp-val',e.target),to=dsc(+e.target.dataset.price);
+    v._v=0;tween(v,to,function(c){v.textContent=num(c)});
+    io.unobserve(e.target);
+  })},{threshold:.4});
+  blocks.forEach(function(b){io.observe(b)});
+}
+
+/* filas del cotizador */
+var items=$$('#sp-list input[type=checkbox]').map(function(i){
+  return {id:i.value,name:i.dataset.name,price:+i.dataset.price,input:i,row:i.closest('.sp-item'),btn:$('.sp-add[data-id="'+i.value+'"]')};
+});
+items.forEach(function(it){
+  var s=$('.sp-pr s',it.row),st=$('.sp-pr strong',it.row);
+  s.textContent=fmt(reg(it.price));st.textContent=fmt(dsc(it.price));
+});
+
+var sel=[],quoteVisible=false;
+function isOn(id){return sel.indexOf(id)>-1}
+function setSel(id,on){var i=sel.indexOf(id);if(on&&i<0)sel.push(id);if(!on&&i>-1)sel.splice(i,1);update()}
+
+function update(){
+  var list=items.filter(function(it){return isOn(it.id)});
+  var R=0,D=0;list.forEach(function(it){R+=reg(it.price);D+=dsc(it.price)});
+  var n=list.length;
+
+  items.forEach(function(it){
+    var on=isOn(it.id);
+    it.input.checked=on;it.row.classList.toggle('is-on',on);
+    if(it.btn){
+      it.btn.classList.toggle('is-on',on);it.btn.setAttribute('aria-pressed',on?'true':'false');
+      $('b',it.btn).textContent=on?'✓':'+';
+      $('span',it.btn).textContent=on?'En tu cotización':'Añadir a mi cotización';
+    }
+  });
+
+  $('#sp-count').textContent=n===0?'Aún no has elegido servicios':n+' servicio'+(n>1?'s':'')+' seleccionado'+(n>1?'s':'');
+  var ul=$('#sp-lines');ul.textContent='';
+  list.forEach(function(it){
+    var li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('span');
+    a.textContent=it.name;b.textContent=fmt(dsc(it.price));li.appendChild(a);li.appendChild(b);ul.appendChild(li);
+  });
+
+  tween($('#sp-reg'),R,function(c){$('#sp-reg').textContent=fmt(c)});
+  tween($('#sp-dis'),R-D,function(c){$('#sp-dis').textContent='-'+fmt(c)});
+  tween($('#sp-tot'),D,function(c){$('#sp-tot').textContent=fmt(c)});
+
+  var sv=$('#sp-saved');sv.hidden=n===0;
+  if(n)sv.textContent='Estás ahorrando '+fmt(R-D)+' con el '+DISC+'% de descuento';
+
+  var wa=$('#sp-wa'),msg,label;
+  if(n){
+    msg=HI+'quiero cotizar estos servicios:\n\n'+list.map(function(it){
+      return '• '+it.name+' — '+fmt(dsc(it.price))+' (precio regular '+fmt(reg(it.price))+')';
+    }).join('\n')+'\n\nPrecio regular: '+fmt(R)+'\nDescuento '+DISC+'%: -'+fmt(R-D)+'\nTotal: '+fmt(D)+'\n\n¿Me pueden dar más información?';
+    label='Enviar cotización por WhatsApp';
+  }else{msg=HI+'me interesan sus servicios digitales.';label='Consultar por WhatsApp'}
+  wa.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+  $('span',wa).textContent=label;
+
+  $('#sp-bn').textContent=n+' servicio'+(n===1?'':'s')+' · '+DISC+'% de descuento';
+  $('#sp-bt').textContent=fmt(D);
+  var barOn=n>0&&!quoteVisible;
+  $('#sp-bar').classList.toggle('on',barOn);document.body.classList.toggle('sp-pad',barOn);
+}
+
+items.forEach(function(it){
+  it.input.addEventListener('change',function(){setSel(it.id,it.input.checked)});
+  if(it.btn)it.btn.addEventListener('click',function(){setSel(it.id,!isOn(it.id))});
+});
+$('#sp-all').addEventListener('click',function(){sel=items.map(function(it){return it.id});update()});
+$('#sp-clear').addEventListener('click',function(){sel=[];update()});
+
+/* la barra inferior se oculta cuando ya estás viendo el cotizador */
+if('IntersectionObserver' in window){
+  new IntersectionObserver(function(es){quoteVisible=es[0].isIntersecting;update()},{threshold:.15}).observe($('#cotizador'));
+}
+update();
+})();
+</script>
+<script>
+/* aviso para deslizar las pestañas de servicios (solo aparece si hay que deslizar) */
+(function(){
+'use strict';
+var tl=document.querySelector('.tabs .tl');if(!tl)return;
+var tabs=tl.querySelectorAll('button'),total=tabs.length;
+var reduce=false;try{reduce=matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){}
+var hint=document.createElement('button');hint.type='button';hint.className='sp-swipe';
+hint.setAttribute('aria-label','Ver más servicios');
+hint.innerHTML='<span>Desliza para ver los '+total+' servicios</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>';
+var dismissed=false,auto=false;
+function dismiss(){if(dismissed)return;dismissed=true;hint.classList.add('sp-gone');setTimeout(function(){if(hint.parentNode)hint.parentNode.removeChild(hint)},450)}
+function check(){
+  var max=tl.scrollWidth-tl.clientWidth,can=max>4;
+  tl.classList.toggle('sp-fr',can&&tl.scrollLeft<max-4);
+  tl.classList.toggle('sp-fl',can&&tl.scrollLeft>4);
+  if(can&&!dismissed&&!hint.parentNode)tl.parentNode.insertBefore(hint,tl);
+  if(!can&&hint.parentNode)hint.parentNode.removeChild(hint);
+}
+tl.addEventListener('scroll',function(){check();if(!auto&&tl.scrollLeft>24)dismiss()},{passive:true});
+window.addEventListener('resize',check);
+hint.addEventListener('click',function(){tl.scrollBy({left:Math.round(tl.clientWidth*.7),behavior:reduce?'auto':'smooth'});dismiss()});
+Array.prototype.forEach.call(tabs,function(b){
+  b.addEventListener('click',function(){
+    var x=b.getBoundingClientRect().left-tl.getBoundingClientRect().left+tl.scrollLeft-20;
+    tl.scrollTo({left:Math.max(0,x),behavior:reduce?'auto':'smooth'});
+  });
+});
+check();
+/* pequeño empujón automático: la barra se mueve sola una vez para que se note que se desliza */
+window.addEventListener('load',function(){
+  check();
+  setTimeout(function(){
+    var max=tl.scrollWidth-tl.clientWidth;
+    if(reduce||max<=4||tl.scrollLeft>0)return;
+    auto=true;
+    tl.scrollTo({left:Math.min(90,max),behavior:'smooth'});
+    setTimeout(function(){tl.scrollTo({left:0,behavior:'smooth'});setTimeout(function(){auto=false},600)},800);
+  },900);
+});
+})();
+</script></body></html>
