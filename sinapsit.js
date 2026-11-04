@@ -35,3 +35,30 @@ if(/[?&]debug/.test(location.search)){const d=document.createElement('pre');d.st
 const u=()=>{const v=window.visualViewport;let w='',mx=0;$$('body *').forEach(e=>{if(e.closest('.tl')||getComputedStyle(e).position==='fixed')return;const r=e.getBoundingClientRect();if(r.right>mx){mx=r.right;w=e.tagName.toLowerCase()+'.'+e.className}});
 d.textContent='innerWidth '+innerWidth+'\nscreen '+screen.width+'\nzoom '+(v?v.scale.toFixed(2):'?')+'\nscrollWidth '+document.documentElement.scrollWidth+'\nmeta '+($('meta[name=viewport]')||{}).content+'\nmás ancho '+w+' ('+Math.round(mx)+')'};
 document.body.append(d);u();addEventListener('resize',u);if(window.visualViewport)visualViewport.addEventListener('resize',u);setInterval(u,1000)}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const popup = document.getElementById("promo-popup");
+    const closeBtn = document.getElementById("close-popup");
+
+    // Muestra el popup tras 1 segundo de haber cargado la página (puedes ajustarlo)
+    setTimeout(function() {
+        if(popup) {
+            popup.style.display = "flex";
+        }
+    }, 1000);
+
+    // Cerrar al hacer clic en la "X"
+    if(closeBtn) {
+        closeBtn.addEventListener("click", function() {
+            popup.style.display = "none";
+        });
+    }
+
+    // Cerrar si hacen clic fuera de la caja contenedora (en el fondo oscuro)
+    window.addEventListener("click", function(event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    });
+});
